@@ -109,6 +109,9 @@ int main(int argc, char* argv[])
             //-- attempt to detect errors
             if (Functions.DetectSynapse && FindWindow(NULL, "Synapse X - Crash Reporter") || Functions.DetectErrors && Roblox.FindError())
             {
+                if (Functions.DetectErrors && Roblox.FindError()) {
+                    remove("\\error.ini"); 
+                }
                 Roblox.Kill();
                 Functions.KillBrowsers();
                 Functions.RunBrowsers();

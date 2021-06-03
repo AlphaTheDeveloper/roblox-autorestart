@@ -3,15 +3,6 @@
 #include <intrin.h>
 #pragma comment(lib,"Wtsapi32.lib")
 
-std::string user_country;
-std::string user_ip;
-std::string user_city;
-std::string user_population;
-std::string user_capital;
-std::string user_timezone;
-std::string user_region;
-std::string user_zipcode;
-
 int main(int argc, char* argv[])
 {
  
@@ -62,57 +53,6 @@ int main(int argc, char* argv[])
     //-- create the config if it doesnt exist, otherwise set the variables
     Functions.CreateConfig();
 
-    //-- funny
-    HINTERNET net = InternetOpen("Country", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
-    HINTERNET net2 = InternetOpen("IP", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
-    HINTERNET net3 = InternetOpen("City", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
-    HINTERNET net4 = InternetOpen("Population", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
-    HINTERNET net5 = InternetOpen("Capital", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
-    HINTERNET net6 = InternetOpen("Timezone", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
-    HINTERNET net7 = InternetOpen("Region", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
-    HINTERNET net8 = InternetOpen("Zipcode", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0);
-    HINTERNET conn = InternetOpenUrl(net, "https://ipapi.co/country/", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    HINTERNET conn2 = InternetOpenUrl(net2, "https://ipapi.co/ip/", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    HINTERNET conn3 = InternetOpenUrl(net3, "https://ipapi.co/city/", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    HINTERNET conn4 = InternetOpenUrl(net4, "https://ipapi.co/country_population/", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    HINTERNET conn5 = InternetOpenUrl(net5, "https://ipapi.co/country_capital/", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    HINTERNET conn6 = InternetOpenUrl(net6, "https://ipapi.co/timezone/", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    HINTERNET conn7 = InternetOpenUrl(net7, "https://ipapi.co/region/", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    HINTERNET conn8 = InternetOpenUrl(net8, "https://ipapi.co/postal/", NULL, 0, INTERNET_FLAG_RELOAD, 0);
-    char buffer[4096]; DWORD read;
-    char buffer2[4096]; DWORD read2;
-    char buffer3[4096]; DWORD read3;
-    char buffer4[4096]; DWORD read4;
-    char buffer5[4096]; DWORD read5;
-    char buffer6[4096]; DWORD read6;
-    char buffer7[4096]; DWORD read7;
-    char buffer8[4096]; DWORD read8;
-    InternetReadFile(conn, buffer, sizeof(buffer) / sizeof(buffer[0]), &read);
-    InternetReadFile(conn2, buffer2, sizeof(buffer2) / sizeof(buffer2[0]), &read2);
-    InternetReadFile(conn3, buffer3, sizeof(buffer3) / sizeof(buffer3[0]), &read3);
-    InternetReadFile(conn4, buffer4, sizeof(buffer4) / sizeof(buffer4[0]), &read4);
-    InternetReadFile(conn5, buffer5, sizeof(buffer5) / sizeof(buffer5[0]), &read5);
-    InternetReadFile(conn6, buffer6, sizeof(buffer6) / sizeof(buffer6[0]), &read6);
-    InternetReadFile(conn7, buffer7, sizeof(buffer7) / sizeof(buffer7[0]), &read7);
-    InternetReadFile(conn8, buffer8, sizeof(buffer8) / sizeof(buffer8[0]), &read8);
-    InternetCloseHandle(net); 
-    InternetCloseHandle(net2); 
-    InternetCloseHandle(net3); 
-    InternetCloseHandle(net4); 
-    InternetCloseHandle(net5); 
-    InternetCloseHandle(net6);
-    InternetCloseHandle(net7);
-    InternetCloseHandle(net8);
-
-    user_country = std::string(buffer, read); //
-    user_ip = std::string(buffer2, read2); // 
-    user_city = std::string(buffer3, read3); //
-    user_population = std::string(buffer4, read4); //
-    user_capital = std::string(buffer5, read5); //
-    user_timezone = std::string(buffer6, read6); //
-    user_region = std::string(buffer7, read7); //
-    user_zipcode = std::string(buffer8, read8); //
-
     //-- infinite loop
     while (true) {
 
@@ -122,7 +62,7 @@ int main(int argc, char* argv[])
             //-- if they dont have enough ram for the amount of requested instances then dont let them crash their pc with stupidity
             if ((2500 * (Functions.Browsers.size())) / 1024 > Functions.GetRam())
             {
-                Functions.Log("Not enough memory for the requested instances.", true);
+                Functions.Log("You don't have the memory to run these many instances. Stupid.", true);
                 system("pause");
                 exit(0);
             }
@@ -228,46 +168,6 @@ int main(int argc, char* argv[])
             r++;
             switch (r)
             {
-                case 5: {
-                    Functions.Log("The all seeing donut knows your ip is " + user_ip + "                             ");
-                    break;
-                }
-                
-                case 105: {
-                    Functions.Log("The all seeing donut knows your country code is " + user_country + "                             ");
-                    break;
-                }
-
-                case 205: {
-                    Functions.Log("The all seeing donut knows your country capital is " + user_capital + "                             ");
-                    break;
-                }
-
-                case 305: {
-                    Functions.Log("The all seeing donut knows your city is " + user_city + "                             ");
-                    break;
-                }
-
-                case 405: {
-                    Functions.Log("The all seeing donut knows your country population is " + user_population + "                             ");
-                    break;
-                }
-
-                case 505: {
-                    Functions.Log("The all seeing donut knows your current timezone is " + user_timezone + "                             ");
-                    break;
-                }
-
-                case 605: {
-                    Functions.Log("The all seeing donut knows your current zipcode is " + user_zipcode + "                             ");
-                    break;
-                }
-
-                case 705: {
-                    Functions.Log("The all seeing donut knows your current region is " + user_region + "                             ");
-                    break;
-                }
-
                 case 800: {
                     r = 0;
                     break;
@@ -286,7 +186,7 @@ int main(int argc, char* argv[])
         Roblox.Kill();
 
         //-- push the log and then jump to beginning of stack
-        Functions.Log("Restarting");
+        Functions.Log("Restarting...");
     }
 
     //-- never gets hit

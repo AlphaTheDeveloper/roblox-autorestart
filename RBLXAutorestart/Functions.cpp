@@ -337,16 +337,7 @@ void Functions::CreateConfig()
                 {
                     case 1:
                     {
-                        if (Functions::FindString(text.c_str(), "2414851778"))
-                        {
-                            Functions::VIP = text;
-                        }
-                        else
-                        {
-                            Functions::Log("VIP Invalid. Please use a dungeon quest VIP server.", true);
-                            Functions::Debounce(5, 1);
-                            exit(001);
-                        }
+                        Functions::VIP = text;
                         break;
                     }
 
